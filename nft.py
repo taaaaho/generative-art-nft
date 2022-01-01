@@ -83,16 +83,6 @@ def generate_single_image(filepaths, output_filename=None):
         bg.save(os.path.join('output', 'single_images', str(int(time.time())) + '.png'))
 
 
-# Generate a single image with all possible traits
-# generate_single_image(['Background/green.png', 
-#                        'Body/brown.png', 
-#                        'Expressions/standard.png',
-#                        'Head Gear/std_crown.png',
-#                        'Shirt/blue_dot.png',
-#                        'Misc/pokeball.png',
-#                        'Hands/standard.png',
-#                        'Wristband/yellow.png'])
-
 
 # Get total number of distinct possible combinations
 def get_total_combinations():
@@ -114,6 +104,11 @@ def select_index(cum_rarities, rand):
     # Should not reach here if everything works okay
     return None
 
+def get_link_value(linklist, trait_set):
+    for link in linklist.keys():
+        if link in trait_set:
+            return linklist[link]
+    raise Exception("linklist don't find in trait_set") 
 
 # Generate a set of traits given rarities
 def generate_trait_set_from_config():
@@ -130,14 +125,20 @@ def generate_trait_set_from_config():
 
         # Select an element index based on random number and cumulative rarity weights
         idx = select_index(cum_rarities, rand_num)
+        try:
+            if layer['link']:
+                trait_value = get_link_value(layer["link"], trait_set)
+                trait_set.append(trait_value)
+                trait_path = os.path.join(layer['directory'], trait_value)
+                trait_paths.append(trait_path)
+        except KeyError:
+            # Add selected trait to trait set
+            trait_set.append(traits[idx])
 
-        # Add selected trait to trait set
-        trait_set.append(traits[idx])
-
-        # Add trait path to trait paths if the trait has been selected
-        if traits[idx] is not None:
-            trait_path = os.path.join(layer['directory'], traits[idx])
-            trait_paths.append(trait_path)
+            # Add trait path to trait paths if the trait has been selected
+            if traits[idx] is not None:
+                trait_path = os.path.join(layer['directory'], traits[idx])
+                trait_paths.append(trait_path)
         
     return trait_set, trait_paths
 
