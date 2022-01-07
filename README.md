@@ -34,7 +34,7 @@ In order to generate JSON metadata, define BASE_NAME, BASE_IMAGE_URL, and BASE_J
 
 ## Usage
 
-This project is forked by Scrappy Squirrels. Scrappy Squirrels have good Document. Check it out [here](https://medium.com/scrappy-squirrels/tutorial-create-generative-nft-art-with-rarities-8ee6ce843133)
+This project is forked from Scrappy Squirrels. Scrappy Squirrels have good Document. Check it out [here](https://medium.com/scrappy-squirrels/tutorial-create-generative-nft-art-with-rarities-8ee6ce843133)
 
 The following features have been added to this program.
 - The output metadata is now compatible with [ThirdWeb](https://thirdweb.com/).
