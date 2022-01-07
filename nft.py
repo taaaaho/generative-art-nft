@@ -233,7 +233,8 @@ def generate_metadata(rarity_table: DataFrame, edition_name: str):
     meta_dataframe = pd.DataFrame(data=meta_list, index=meta_index, columns=meta_column)
 
     meta_dataframe.to_csv(
-        os.path.join("output", "edition " + str(edition_name), "metadata.csv")
+        os.path.join("output", "edition " + str(edition_name), "metadata.csv"),
+        index=False,
     )
 
 
