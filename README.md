@@ -30,7 +30,6 @@ You can use this library even if you do not know how to program (in Python or ot
 
 Upload your input assets in the `assets` folder, fill up the `config.py` file, and then run `python nft.py`.
 
-In order to generate JSON metadata, define BASE_NAME, BASE_IMAGE_URL, and BASE_JSON in `metadata.py` and then run `python metadata.py`.
 
 ## Usage
 
