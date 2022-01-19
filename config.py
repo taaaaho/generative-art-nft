@@ -24,7 +24,7 @@ METADATA = {
     "name": "Love Addicted Girl #_ID_",
     "description": "2000 Generative NFT collection",
     "external_url": "https://soudan-nft.xyz/",
-    "background": "#000000",
+    "background_color": "000000",
     #    "youtube_url": ""
 }
 
@@ -34,7 +34,7 @@ CONFIG = [
         "name": "Background",
         "directory": "background",
         "required": True,
-        "rarity_weights": None,
+        "rarity_weights": [10, 10, 10, 1, 1, 1, 1, 10, 10],
     },
     {
         "id": 2,
@@ -64,10 +64,13 @@ CONFIG = [
         "required": True,
         "rarity_weights": None,
         "link": {
-            "backhair1.png": "hair1.png",
-            "backhair2.png": "hair2.png",
-            "backhair3.png": "hair3.png",
-            "backhair4.png": "hair4.png",
+            "cocktail.png": "cocktail.png",
+            "gal.png": "gal.png",
+            "hime.png": "hime.png",
+            "hime2.png": "hime2.png",
+            "odango.png": "odango.png",
+            "twintail.png": "twintail.png",
+            "zero.png": "zero.png",
         },
     },
 ]
