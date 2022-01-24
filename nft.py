@@ -2,6 +2,7 @@
 # coding: utf-8
 
 # Import required libraries
+from config import CONFIG, METADATA
 from PIL import Image
 import pandas as pd
 import numpy as np
@@ -18,9 +19,9 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
 # Import configuration file
-from config import CONFIG, METADATA
 
 # Parse the configuration file and make sure it's valid
+
 def parse_config():
 
     # Input traits must be placed in the assets folder. Change this value if you want to name it something else.
@@ -33,7 +34,8 @@ def parse_config():
         layer_path = os.path.join(assets_path, layer["directory"])
 
         # Get trait array in sorted order
-        traits = sorted([trait for trait in os.listdir(layer_path) if trait[0] != "."])
+        traits = sorted(
+            [trait for trait in os.listdir(layer_path) if trait[0] != "."])
 
         # If layer is not required, add a None to the start of the traits array
         if not layer["required"]:
@@ -84,7 +86,8 @@ def generate_single_image(filepaths, output_filename=None):
         # If output filename is not specified, use timestamp to name the image and save it in output/single_images
         if not os.path.exists(os.path.join("output", "single_images")):
             os.makedirs(os.path.join("output", "single_images"))
-        bg.save(os.path.join("output", "single_images", str(int(time.time())) + ".png"))
+        bg.save(os.path.join("output", "single_images",
+                str(int(time.time())) + ".png"))
 
 
 # Get total number of distinct possible combinations
@@ -156,7 +159,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
         rarity_table[layer["name"]] = []
 
     # Define output path to output/edition {edition_num}
-    op_path = os.path.join("output", "edition " + str(edition), "images")
+    op_path = os.path.join("output", "edition_" + str(edition), "images")
 
     # Will require this to name final images as 000, 001,...
     zfill_count = len(str(count - 1))
@@ -180,13 +183,15 @@ def generate_images(edition: str, count: int) -> DataFrame:
         # Populate the rarity table with metadata of newly created image
         for idx, trait in enumerate(trait_sets):
             if trait is not None:
-                rarity_table[CONFIG[idx]["name"]].append(trait[: -1 * len(".png")])
+                rarity_table[CONFIG[idx]["name"]].append(
+                    trait[: -1 * len(".png")])
             else:
                 rarity_table[CONFIG[idx]["name"]].append("none")
 
     # Create the final rarity table by removing duplicate creat
     rarity_table = pd.DataFrame(rarity_table).drop_duplicates()
-    print("Generated %i images, %i are distinct" % (count, rarity_table.shape[0]))
+    print("Generated %i images, %i are distinct" %
+          (count, rarity_table.shape[0]))
 
     img_tb_removed = sorted(list(set(range(count)) - set(rarity_table.index)))
 
@@ -230,10 +235,11 @@ def generate_metadata(rarity_table: DataFrame, edition_name: str):
         listvalue.extend(row.to_list())
         meta_list.append(listvalue)
 
-    meta_dataframe = pd.DataFrame(data=meta_list, index=meta_index, columns=meta_column)
+    meta_dataframe = pd.DataFrame(
+        data=meta_list, index=meta_index, columns=meta_column)
 
     meta_dataframe.to_csv(
-        os.path.join("output", "edition " + str(edition_name), "metadata.csv"),
+        os.path.join("output", "edition_" + str(edition_name), "metadata.csv"),
         index=False,
     )
 
