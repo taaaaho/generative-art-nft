@@ -46,6 +46,6 @@ The following features have been added to this program.
 
 This library was created as part of the Love Addicted Girl project.
 
-Love Addicted Girl is a collection of 2,000 randomly generated NFTs on the Polygon Blockchain. LoveAddicted Girl are meant for buyers, creators, and developers who are completely new to the NFT ecosystem.
+Love Addicted Girl is a collection of 2,000 randomly generated NFTs. LoveAddicted Girl are meant for buyers, creators, and developers who are completely new to the NFT ecosystem.
 
 The community is Built by SoudanNFT. SoudanNFT is Japanese NFT creator and investor community.
