@@ -34,7 +34,15 @@ CONFIG = [
         "name": "Background",
         "directory": "background",
         "required": True,
-        "rarity_weights": [10, 10, 10, 1, 1, 1, 1, 10, 10],
+        "rarity_weights": [300,  # Blue
+                           30,  # Celestial Moon
+                           30,  # Maids
+                           5,  # Golden Hour
+                           30,  # Lovely Lantern
+                           5,  # Morning Sun
+                           300,  # Pink Stripe
+                           300  # Violet Stripe
+                           ],
     },
     {
         "id": 2,
@@ -48,14 +56,36 @@ CONFIG = [
         "name": "Body",
         "directory": "body",
         "required": True,
-        "rarity_weights": None,
+        "rarity_weights": [
+            8,  # Autumn Kimono
+            8,  # Black Bikini
+            8,  # Black Maid
+            8,  # Blue Lolita
+            8,  # Casual Brown
+            8,  # Casual Black
+            8,  # Dealder Black
+            8,  # Dealer White
+            8,  # Festival Kimono
+            8,  # Pink Lolita
+            8,  # Red Maid
+            8,  # Studded Bikini
+            3,  # Succubus
+            1  # Wedding doress
+        ],
     },
     {
         "id": 4,
         "name": "Face",
         "directory": "face",
         "required": True,
-        "rarity_weights": None,
+        "rarity_weights": [5,  # Confident
+                           5,  # Coy
+                           5,  # Flirty
+                           5,  # Gal
+                           1,  # Heterochromia
+                           5,  # Pretty Please
+                           5  # Wink
+                           ],
     },
     {
         "id": 5,
@@ -64,13 +94,13 @@ CONFIG = [
         "required": True,
         "rarity_weights": None,
         "link": {
-            "cocktail.png": "cocktail.png",
-            "gal.png": "gal.png",
-            "hime.png": "hime.png",
-            "hime2.png": "hime2.png",
-            "odango.png": "odango.png",
-            "twintail.png": "twintail.png",
-            "zero.png": "zero.png",
+            "Black Pigtails.png": "Black Pigtails.png",
+            "Blue Pigtails.png": "Blue Pigtails.png",
+            "Bun.png": "Bun.png",
+            "Cafe Girl.png": "Cafe Girl.png",
+            "Gal.png": "Gal.png",
+            "Straight.png": "Straight.png",
+            "Wavy.png": "Wavy.png",
         },
     },
 ]
