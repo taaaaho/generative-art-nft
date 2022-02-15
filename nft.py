@@ -178,7 +178,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
         trait_sets, trait_paths = generate_trait_set_from_config()
 
         # Generate the actual image
-        generate_single_image(trait_paths, os.path.join(op_path, image_name))
+        #generate_single_image(trait_paths, os.path.join(op_path, image_name))
 
         # Populate the rarity table with metadata of newly created image
         for idx, trait in enumerate(trait_sets):
@@ -199,8 +199,8 @@ def generate_images(edition: str, count: int) -> DataFrame:
     print("Removing %i images..." % (len(img_tb_removed)))
 
     # op_path = os.path.join('output', 'edition ' + str(edition))
-    for i in img_tb_removed:
-        os.remove(os.path.join(op_path, str(i).zfill(zfill_count) + ".png"))
+    # for i in img_tb_removed:
+    #os.remove(os.path.join(op_path, str(i).zfill(zfill_count) + ".png"))
 
     # Rename images such that it is sequentialluy numbered
     for idx, img in enumerate(sorted(os.listdir(op_path))):
