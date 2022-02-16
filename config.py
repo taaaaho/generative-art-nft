@@ -21,10 +21,10 @@
 # Be sure to check out the tutorial in the README for more details.
 
 METADATA = {
-    "name": "Love Addicted Girl #_ID_",
-    "description": "2000 Generative NFT collection",
+    "name": "LAG#_ID_",
+    "description": "The ‘Love Addicted Girls with BIGLOVE’ (LAG) Collection is a wave of 4,000 Japanese-inspired unique digital exclusive collectibles made with love by the Soudan NFT community on the Ethereum blockchain. Your LAG NFT is your exclusive access to Soudan Exclusive Members-only partnerships, benefits, and perks.",
     "external_url": "https://soudan-nft.xyz/",
-    "background_color": "000000",
+    "background_color": "FFFFFF",
     #    "youtube_url": ""
 }
 
@@ -35,7 +35,7 @@ CONFIG = [
         "directory": "background",
         "required": True,
         "rarity_weights": [
-            26,  # Blue Stripe
+            26,  # Blue PinStripe
             3,  # Celestial Moon
             1,  # CryptoMaids
             1,  # Golden Hour
@@ -43,10 +43,10 @@ CONFIG = [
             1,  # Moogie
             1,  # Morning Sun
             26,  # Pink Stripe
+            26,  # Violet Stripe
             1,  # [R] Blue Pinstripe2
             1,  # [R] Pink Pinstripe2
             1,  # [R] Violet Pinstripe2
-            26  # Violet Stripe
         ],
     },
     {
@@ -60,6 +60,8 @@ CONFIG = [
             10,  # Bun
             10,  # Cafe Girl
             10,  # Gal
+            10,  # Straight
+            10,  # Wavy
             3,  # [R]Black Pigtails
             2,  # [R]Black Pigtails2
             2,  # [R]Blue Pigtails
@@ -74,8 +76,6 @@ CONFIG = [
             2,  # [R]Straight2
             3,  # [R]Wavy
             1,  # [R]Wavy2
-            10,  # Straight
-            10,  # Wavy
         ],
     },
     {
@@ -97,7 +97,7 @@ CONFIG = [
             5,  # Dealeer Red
             5,  # Dealer White
             5,  # Festival Kimono
-            2,  # Pink Lolita
+            2,  # Harness
             5,  # Pink Lolita
             5,  # Red Maid
             5,  # School Brown
@@ -126,17 +126,17 @@ CONFIG = [
         "directory": "face",
         "required": True,
         "rarity_weights": [
+            12,  # Cat
             12,  # Confident
             12,  # Coy
             12,  # Flirty
-            12,  # Gal
             3,  # Heterochromia
+            3,  # Miss Secretary
             12,  # Pretty Please
             12,  # Purple Gal
+            12,  # Wink
             3,  # [R]Coy
-            3,  # [R]Gal
             1,  # [R]Heterochromia
-            12  # Wink
         ],
     },
     {
@@ -146,24 +146,24 @@ CONFIG = [
         "required": True,
         "rarity_weights": None,
         "link": {
-            "R_Black_Pigtails.png": "[R]Black Pigtails.png",
-            "R_Black_Pigtails2.png": "[R]Black Pigtails2.png",
-            "R_Blue_Pigtails.png": "[R]Blue Pigtails.png",
-            "R_Blue_Pigtails2.png": "[R]Blue Pigtails2.png",
-            "R_Bun.png": "[R]Bun.png",
-            "R_Bun2.png": "[R]Bun2.png",
-            "R_Cafe_Girl.png": "[R]Cafe Girl.png",
-            "R_Cafe_Girl2.png": "[R]Cafe Girl2.png",
-            "R_Gal.png": "[R]Gal.png",
-            "R_Gal2.png": "[R]Gal2.png",
-            "R_Straight.png": "[R]Straight.png",
-            "R_Straight2.png": "[R]Straight2.png",
-            "R_Wavy.png": "[R]Wavy.png",
-            "R_Wavy2.png": "[R]Wavy2.png",
-            "Black_Pigtails.png": "Black Pigtails.png",
-            "Blue_Pigtails.png": "Blue Pigtails.png",
+            "[R]Black Pigtails.png": "[R]Black Pigtails.png",
+            "[R]Black Pigtails2.png": "[R]Black Pigtails2.png",
+            "[R]Blue Pigtails.png": "[R]Blue Pigtails.png",
+            "[R]Blue Pigtails2.png": "[R]Blue Pigtails2.png",
+            "[R]Bun.png": "[R]Bun.png",
+            "[R]Bun2.png": "[R]Bun2.png",
+            "[R]Cafe Girl.png": "[R]Cafe Girl.png",
+            "[R]Cafe Girl2.png": "[R]Cafe Girl2.png",
+            "[R]Gal.png": "[R]Gal.png",
+            "[R]Gal2.png": "[R]Gal2.png",
+            "[R]Straight.png": "[R]Straight.png",
+            "[R]Straight2.png": "[R]Straight2.png",
+            "[R]Wavy.png": "[R]Wavy.png",
+            "[R]Wavy2.png": "[R]Wavy2.png",
+            "Black Pigtails.png": "Black Pigtails.png",
+            "Blue Pigtails.png": "Blue Pigtails.png",
             "Bun.png": "Bun.png",
-            "Cafe_Girl.png": "Cafe Girl.png",
+            "Cafe Girl.png": "Cafe Girl.png",
             "Gal.png": "Gal.png",
             "Straight.png": "Straight.png",
             "Wavy.png": "Wavy.png",
