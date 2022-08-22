@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "generative-art-nft"
+version = "0.1.0"
+description = ""
+authors = ["taaaaho <taaaaho@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^1.4.3"
+Pillow = "^9.2.0"
+progressbar2 = "^4.0.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
