@@ -20,10 +20,14 @@
 
 # Be sure to check out the tutorial in the README for more details.
 
+METACONFIG = {
+    "output": "csv"
+}
+
 METADATA = {
-    "name": "LAG#_ID_",
-    "description": "The ‘Love Addicted Girls with BIGLOVE’ (LAG) Collection is a wave of 4,000 Japanese-inspired unique digital exclusive collectibles made with love by the Soudan NFT community on the Ethereum blockchain. Your LAG NFT is your exclusive access to Soudan Exclusive Members-only partnerships, benefits, and perks.",
-    "external_url": "https://soudan-nft.xyz/",
+    "name": "METAKOZO#_ID_",
+    "description": "MetaKozo sample description",
+    "external_url": "https://metakozo-nft.xyz",
     "background_color": "FFFFFF",
     #    "youtube_url": ""
 }
@@ -31,142 +35,130 @@ METADATA = {
 CONFIG = [
     {
         "id": 1,
-        "name": "Background",
-        "directory": "background",
+        "name": "background",
+        "directory": "1-background",
         "required": True,
-        "rarity_weights": [
-            26,  # Blue PinStripe
-            3,  # Celestial Moon
-            1,  # CryptoMaids
-            1,  # Golden Hour
-            3,  # Lovely Lantern
-            1,  # Moogie
-            1,  # Morning Sun
-            26,  # Pink Stripe
-            26,  # Violet Stripe
-            1,  # [R] Blue Pinstripe2
-            1,  # [R] Pink Pinstripe2
-            1,  # [R] Violet Pinstripe2
-        ],
+        "rarity_weights": None,
     },
-    {
-        "id": 2,
-        "name": "Backhair",
-        "directory": "backhair",
-        "required": True,
-        "rarity_weights": [
-            10,  # Black Pigtails
-            10,  # Blue Pigtails
-            10,  # Bun
-            10,  # Cafe Girl
-            10,  # Gal
-            10,  # Straight
-            10,  # Wavy
-            3,  # [R]Black Pigtails
-            2,  # [R]Black Pigtails2
-            2,  # [R]Blue Pigtails
-            3,  # [R]Blue Pigtails2
-            3,  # [R]Bun
-            3,  # [R]Bun2
-            3,  # [R]Cafe Girl
-            1,  # [R]Cafe Girl2
-            3,  # [R]Gal
-            1,  # [R]Gal2
-            3,  # [R]Straight
-            2,  # [R]Straight2
-            3,  # [R]Wavy
-            1,  # [R]Wavy2
-        ],
-    },
+    # {
+    #     "id": 2,
+    #     "name": "back_object",
+    #     "directory": "2-back_object",
+    #     "required": False,
+    #     "rarity_weights": None,
+    # },
     {
         "id": 3,
-        "name": "Body",
-        "directory": "body",
+        "name": "body",
+        "directory": "3-body",
         "required": True,
-        "rarity_weights": [
-            5,  # Autumn Kimono
-            5,  # Black Bikini
-            5,  # Black Maid
-            5,  # Blue Lolita
-            5,  # Casual Black
-            5,  # Casual Brown
-            5,  # Casual Cream
-            5,  # Casual Pink
-            5,  # Dealeer Black
-            5,  # Dealeer Blue
-            5,  # Dealeer Red
-            5,  # Dealer White
-            5,  # Festival Kimono
-            2,  # Harness
-            5,  # Pink Lolita
-            5,  # Red Maid
-            5,  # School Brown
-            5,  # School Gray
-            5,  # Studded Bikini
-            1,  # Succubus
-            3,  # [R]Black Maid
-            1,  # [R]Blue Lolita
-            2,  # [R]Card Dealder Black
-            2,  # [R]Card Dealer White
-            1,  # [R]Casual Brown
-            1,  # [R]Casual Cream
-            3,  # [R]Kimono rose
-            3,  # [R]Kimono sakura
-            3,  # [R]Kimono
-            1,  # [R]Pink Lolita
-            2,  # [R]Red Maid
-            3,  # [R]School Brown
-            3,  # [R]School Gray
-            2,  # [R]Studded Bikini
-        ],
+        "rarity_weights": None,
     },
     {
         "id": 4,
-        "name": "Face",
-        "directory": "face",
-        "required": True,
-        "rarity_weights": [
-            12,  # Cat
-            12,  # Confident
-            12,  # Coy
-            12,  # Flirty
-            3,  # Heterochromia
-            3,  # Miss Secretary
-            12,  # Pretty Please
-            12,  # Purple Gal
-            12,  # Wink
-            3,  # [R]Coy
-            1,  # [R]Heterochromia
-        ],
+        "name": "clothes",
+        "directory": "4-clothes",
+        "required": False,
+        "rarity_weights": None,
     },
     {
         "id": 5,
-        "name": "Fronthair",
-        "directory": "fronthair",
+        "name": "head",
+        "directory": "5-head",
         "required": True,
         "rarity_weights": None,
         "link": {
-            "[R]Black Pigtails.png": "[R]Black Pigtails.png",
-            "[R]Black Pigtails2.png": "[R]Black Pigtails2.png",
-            "[R]Blue Pigtails.png": "[R]Blue Pigtails.png",
-            "[R]Blue Pigtails2.png": "[R]Blue Pigtails2.png",
-            "[R]Bun.png": "[R]Bun.png",
-            "[R]Bun2.png": "[R]Bun2.png",
-            "[R]Cafe Girl.png": "[R]Cafe Girl.png",
-            "[R]Cafe Girl2.png": "[R]Cafe Girl2.png",
-            "[R]Gal.png": "[R]Gal.png",
-            "[R]Gal2.png": "[R]Gal2.png",
-            "[R]Straight.png": "[R]Straight.png",
-            "[R]Straight2.png": "[R]Straight2.png",
-            "[R]Wavy.png": "[R]Wavy.png",
-            "[R]Wavy2.png": "[R]Wavy2.png",
-            "Black Pigtails.png": "Black Pigtails.png",
-            "Blue Pigtails.png": "Blue Pigtails.png",
-            "Bun.png": "Bun.png",
-            "Cafe Girl.png": "Cafe Girl.png",
-            "Gal.png": "Gal.png",
-            "Straight.png": "Straight.png",
-            "Wavy.png": "Wavy.png",
+            "body_brown.png": "head_brown.png",
+            "body_white.png": "head_white.png",
+            "body.png": "head.png",
         },
     },
+    {
+        "id": 6,
+        "name": "eyes",
+        "directory": "6-eyes",
+        "required": True,
+        "rarity_weights": None,
+    },
+    {
+        "id": 7,
+        "name": "mouth",
+        "directory": "7-mouth",
+        "required": True,
+        "rarity_weights": None,
+    },
+    {
+        "id": 8,
+        "name": "nose",
+        "directory": "8-nose",
+        "required": True,
+        "rarity_weights": None,
+        "link": {
+            "body_brown.png": "nose_brown.png",
+            "body_white.png": "nose_white.png",
+            "body.png": "nose.png",
+        },
+    },
+    {
+        "id": 9,
+        "name": "hair",
+        "directory": "9-hair",
+        "required": True,
+        "rarity_weights": None,
+    },
+    {
+        "id": 10,
+        "name": "face_object",
+        "directory": "10-face_object",
+        "required": False,
+        "rarity_weights": None,
+        "remove": ['eyes'],
+    },
+    {
+        "id": 11,
+        "name": "ear",
+        "directory": "11-ear",
+        "required": True,
+        "rarity_weights": None,
+        "link": {
+            "body_brown.png": "ear_brown.png",
+            "body_white.png": "ear_white.png",
+            "body.png": "ear.png",
+        },
+    },
+    {
+        "id": 12,
+        "name": "head_object",
+        "directory": "12-head_object",
+        "required": False,
+        "rarity_weights": None,
+    },
+    {
+        "id": 13,
+        "name": "hand_object",
+        "directory": "13-hand_object",
+        "required": False,
+        "rarity_weights": None,
+    },
+    {
+        "id": 14,
+        "name": "object",
+        "directory": "14-object",
+        "required": False,
+        "rarity_weights": None,
+    },
+    # {
+    #     "id": 15,
+    #     "name": "nose",
+    #     "directory": "nose",
+    #     "required": True,
+    #     "rarity_weights": None,
+    # },
+    # {
+    #     "id": 16,
+    #     "name": "object",
+    #     "directory": "object",
+    #     "required": True,
+    #     "rarity_weights": None,
+    # },
 ]

@@ -2,7 +2,8 @@
 # coding: utf-8
 
 # Import required libraries
-from config import CONFIG, METADATA
+import json
+from config import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
 import numpy as np
@@ -25,7 +26,7 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 def parse_config():
 
     # Input traits must be placed in the assets folder. Change this value if you want to name it something else.
-    assets_path = "assets"
+    assets_path = "assets/metakozo"
 
     # Loop through all layers defined in CONFIG
     for layer in CONFIG:
@@ -71,12 +72,12 @@ def get_weighted_rarities(arr):
 def generate_single_image(filepaths, output_filename=None):
 
     # Treat the first layer as the background
-    bg = Image.open(os.path.join("assets", filepaths[0]))
+    bg = Image.open(os.path.join("assets/metakozo", filepaths[0]))
 
     # Loop through layers 1 to n and stack them on top of another
     for filepath in filepaths[1:]:
         if filepath.endswith(".png"):
-            img = Image.open(os.path.join("assets", filepath))
+            img = Image.open(os.path.join("assets/metakozo", filepath))
             bg.paste(img, (0, 0), img)
 
     # Save the final image into desired location
@@ -147,6 +148,15 @@ def generate_trait_set_from_config():
             if traits[idx] is not None:
                 trait_path = os.path.join(layer["directory"], traits[idx])
                 trait_paths.append(trait_path)
+        try:
+            if idx != 0 and layer["remove"]:
+                for l in layer["remove"]:
+                    trait_set = [i if not (l in i)
+                                 else 'none' for i in trait_set]
+                    trait_paths = [i if not (l in i)
+                                   else 'none' for i in trait_paths]
+        except KeyError:
+            pass
 
     return trait_set, trait_paths
 
@@ -215,7 +225,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
     return rarity_table
 
 
-def generate_metadata(rarity_table: DataFrame, edition_name: str):
+def generate_metadata_csv(rarity_table: DataFrame, edition_name: str):
     """Generate Metadata CSV from rarity data csv."""
 
     meta_list = []
@@ -239,9 +249,59 @@ def generate_metadata(rarity_table: DataFrame, edition_name: str):
         data=meta_list, index=meta_index, columns=meta_column)
 
     meta_dataframe.to_csv(
-        os.path.join("output", "edition_" + str(edition_name), "metadata.csv"),
+        os.path.join("output", "edition_" +
+                     str(edition_name), "metadata.csv"),
         index=False,
     )
+
+
+def generate_metadata_json(rarity_table: DataFrame, edition_name: str):
+    """Generate Metadata CSV from rarity data csv."""
+
+    meta_list = []
+    meta_index = []
+
+    meta_column = list(METADATA.keys())
+    rarity_column = rarity_table.keys().tolist()
+    meta_column.append('attributes')
+
+    for index, row in rarity_table.iterrows():
+        meta_index.append(str(index))
+
+        listvalue = []
+        for metavalue in METADATA.values():
+            listvalue.append(metavalue.replace("_ID_", str(index)))
+
+        ralityvalue = []
+        for (rarity, value) in zip(rarity_column, row):
+            ralityvalue.append({
+                "trait_type": rarity,
+                "value": 'none' if value == '' else value
+            })
+        listvalue.append(ralityvalue)
+        meta_list.append(listvalue)
+
+    meta_dataframe = pd.DataFrame(
+        data=meta_list, index=meta_index, columns=meta_column)
+
+    if METACONFIG["output"] == "csv":
+        meta_dataframe.to_csv(
+            os.path.join("output", "edition_" +
+                         str(edition_name), "metadata.csv"),
+            index=False,
+        )
+    elif METACONFIG["output"] == "json":
+        jsonArray = meta_dataframe.to_json(
+            orient="records",
+        )
+        metadataDirName = os.path.join("output", "edition_" +
+                                       str(edition_name), "metadata")
+        if not(os.path.exists(metadataDirName)):
+            os.makedirs(metadataDirName)
+        for index, item in enumerate(json.loads(jsonArray)):
+            with open(os.path.join(os.getcwd(), "output", "edition_" +
+                                   str(edition_name), "metadata", str(index) + ".json"), "w") as f:
+                json.dump(item, f, indent=4)
 
 
 # Main function. Point of entry
@@ -265,7 +325,10 @@ def main():
 
     print("Starting task...")
     rt = generate_images(edition_name, num_avatars)
-    generate_metadata(rt, edition_name)
+    if METACONFIG["output"] == "csv":
+        generate_metadata_csv(rt, edition_name)
+    elif METACONFIG["output"] == "json":
+        generate_metadata_json(rt, edition_name)
 
     print("Saving metadata...")
 
