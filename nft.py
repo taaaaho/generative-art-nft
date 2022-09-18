@@ -3,6 +3,7 @@
 
 # Import required libraries
 import json
+from typing import Type
 from config import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
@@ -157,6 +158,8 @@ def generate_trait_set_from_config():
                                    else 'none' for i in trait_paths]
         except KeyError:
             pass
+        except TypeError:
+            pass
 
     return trait_set, trait_paths
 
@@ -216,7 +219,8 @@ def generate_images(edition: str, count: int) -> DataFrame:
     for idx, img in enumerate(sorted(os.listdir(op_path))):
         os.rename(
             os.path.join(op_path, img),
-            os.path.join(op_path, str(idx).zfill(zfill_count) + ".png"),
+            os.path.join(op_path, str(
+                idx + METACONFIG["start_seq"]).zfill(zfill_count) + ".png"),
         )
 
     # Modify rarity table to reflect removals
@@ -263,14 +267,19 @@ def generate_metadata_json(rarity_table: DataFrame, edition_name: str):
 
     meta_column = list(METADATA.keys())
     rarity_column = rarity_table.keys().tolist()
+    meta_column.append('image')
     meta_column.append('attributes')
 
     for index, row in rarity_table.iterrows():
-        meta_index.append(str(index))
+        tmp_index = index + METACONFIG["start_seq"]
+        meta_index.append(str(tmp_index))
 
         listvalue = []
         for metavalue in METADATA.values():
-            listvalue.append(metavalue.replace("_ID_", str(index)))
+            listvalue.append(metavalue.replace("_ID_", str(tmp_index)))
+
+        # for image url
+        listvalue.append('https://xxxxxxxxxx/' + str(tmp_index))
 
         ralityvalue = []
         for (rarity, value) in zip(rarity_column, row):

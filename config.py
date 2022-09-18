@@ -21,14 +21,15 @@
 # Be sure to check out the tutorial in the README for more details.
 
 METACONFIG = {
-    "output": "csv"
+    "output": "json",
+    "start_seq": 0
 }
 
 METADATA = {
-    "name": "METAKOZO#_ID_",
-    "description": "MetaKozo sample description",
-    "external_url": "https://metakozo-nft.xyz",
-    "background_color": "FFFFFF",
+    "name": "METAKO#_ID_",
+    "description": "Meta sample description",
+    "external_url": "https://meta-nft.xyz",
+    # "background_color": "FFFFFF",
     #    "youtube_url": ""
 }
 
