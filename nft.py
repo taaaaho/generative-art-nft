@@ -14,6 +14,7 @@ import random
 from pandas.core.base import DataError
 from pandas.core.frame import DataFrame
 from progressbar import progressbar
+import math
 
 import warnings
 
@@ -41,7 +42,8 @@ def parse_config():
 
         # If layer is not required, add a None to the start of the traits array
         if not layer["required"]:
-            traits = [None] + traits
+            for vacant in range(math.floor(len(traits)/3)):
+                traits = [None] + traits
 
         # Generate final rarity weights
         if layer["rarity_weights"] is None:
