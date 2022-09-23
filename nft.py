@@ -42,7 +42,7 @@ def parse_config():
 
         # If layer is not required, add a None to the start of the traits array
         if not layer["required"]:
-            for vacant in range(math.floor(len(traits)/3)):
+            for vacant in range(math.floor(len(traits)/2)):
                 traits = [None] + traits
 
         # Generate final rarity weights
