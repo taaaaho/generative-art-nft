@@ -4,7 +4,13 @@
 # Import required libraries
 import json
 from typing import Type
-from config import CONFIG, METADATA, METACONFIG
+# from config.config_Invisible import CONFIG, METADATA, METACONFIG
+# from config.config_alien import CONFIG, METADATA, METACONFIG
+from config.config_zombie import CONFIG, METADATA, METACONFIG
+# from config.config_space import CONFIG, METADATA, METACONFIG
+# from config.config_normal import CONFIG, METADATA, METACONFIG
+# from config.config_Angel import CONFIG, METADATA, METACONFIG
+# from config.config_Devil import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
 import numpy as np
@@ -28,22 +34,17 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 def parse_config():
 
     # Input traits must be placed in the assets folder. Change this value if you want to name it something else.
-    assets_path = "assets/metakozo"
+    assets_path = METACONFIG['assets_path']
 
     # Loop through all layers defined in CONFIG
     for layer in CONFIG:
 
         # Go into assets/ to look for layer folders
         layer_path = os.path.join(assets_path, layer["directory"])
-
         # Get trait array in sorted order
         traits = sorted(
             [trait for trait in os.listdir(layer_path) if trait[0] != "."])
-
-        # If layer is not required, add a None to the start of the traits array
-        if not layer["required"]:
-            for vacant in range(math.floor(len(traits)/2)):
-                traits = [None] + traits
+        print(traits)
 
         # Generate final rarity weights
         if layer["rarity_weights"] is None:
@@ -73,14 +74,15 @@ def get_weighted_rarities(arr):
 
 # Generate a single image given an array of filepaths representing layers
 def generate_single_image(filepaths, output_filename=None):
+    assets_path = METACONFIG['assets_path']
 
     # Treat the first layer as the background
-    bg = Image.open(os.path.join("assets/metakozo", filepaths[0]))
+    bg = Image.open(os.path.join(assets_path, filepaths[0]))
 
     # Loop through layers 1 to n and stack them on top of another
     for filepath in filepaths[1:]:
         if filepath.endswith(".png"):
-            img = Image.open(os.path.join("assets/metakozo", filepath))
+            img = Image.open(os.path.join(assets_path, filepath))
             bg.paste(img, (0, 0), img)
 
     # Save the final image into desired location
@@ -119,6 +121,8 @@ def get_link_value(linklist, trait_set):
     for link in linklist.keys():
         if link in trait_set:
             return linklist[link]
+    print(linklist)
+    print(trait_set)
     raise Exception("linklist don't find in trait_set")
 
 
@@ -152,11 +156,11 @@ def generate_trait_set_from_config():
                 trait_path = os.path.join(layer["directory"], traits[idx])
                 trait_paths.append(trait_path)
         try:
-            if idx != 0 and layer["remove"]:
+            if idx != 0 and layer["remove"] and traits[idx] != 'none.png':
                 for l in layer["remove"]:
-                    trait_set = [i if not (l in i)
+                    trait_set = [i if not (trait_set[5] in i)
                                  else 'none' for i in trait_set]
-                    trait_paths = [i if not (l in i)
+                    trait_paths = [i if not (trait_paths[5] in i)
                                    else 'none' for i in trait_paths]
         except KeyError:
             pass
@@ -209,6 +213,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
           (count, rarity_table.shape[0]))
 
     img_tb_removed = sorted(list(set(range(count)) - set(rarity_table.index)))
+    print(img_tb_removed)
 
     # Remove duplicate images
     print("Removing %i images..." % (len(img_tb_removed)))
@@ -217,13 +222,15 @@ def generate_images(edition: str, count: int) -> DataFrame:
     for i in img_tb_removed:
         os.remove(os.path.join(op_path, str(i).zfill(zfill_count) + ".png"))
 
+    print(sorted(os.listdir(op_path)))
     # Rename images such that it is sequentialluy numbered
     for idx, img in enumerate(sorted(os.listdir(op_path))):
-        os.rename(
-            os.path.join(op_path, img),
-            os.path.join(op_path, str(
-                idx + METACONFIG["start_seq"]).zfill(zfill_count) + ".png"),
-        )
+        print(img)
+        # os.rename(
+        #     os.path.join(op_path, img),
+        #     os.path.join(op_path, str(
+        #         idx + METACONFIG["start_seq"]).zfill(zfill_count) + ".png"),
+        # )
 
     # Modify rarity table to reflect removals
     rarity_table = rarity_table.reset_index()
@@ -231,7 +238,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
     return rarity_table
 
 
-def generate_metadata_csv(rarity_table: DataFrame, edition_name: str):
+def generate_metadata_csv(rarity_table: DataFrame, edition_name: str, count: int):
     """Generate Metadata CSV from rarity data csv."""
 
     meta_list = []
@@ -261,7 +268,7 @@ def generate_metadata_csv(rarity_table: DataFrame, edition_name: str):
     )
 
 
-def generate_metadata_json(rarity_table: DataFrame, edition_name: str):
+def generate_metadata_json(rarity_table: DataFrame, edition_name: str, count: int):
     """Generate Metadata CSV from rarity data csv."""
 
     meta_list = []
@@ -271,6 +278,8 @@ def generate_metadata_json(rarity_table: DataFrame, edition_name: str):
     rarity_column = rarity_table.keys().tolist()
     meta_column.append('image')
     meta_column.append('attributes')
+
+    zfill_count = len(str(count - 1))
 
     for index, row in rarity_table.iterrows():
         tmp_index = index + METACONFIG["start_seq"]
@@ -311,7 +320,7 @@ def generate_metadata_json(rarity_table: DataFrame, edition_name: str):
             os.makedirs(metadataDirName)
         for index, item in enumerate(json.loads(jsonArray)):
             with open(os.path.join(os.getcwd(), "output", "edition_" +
-                                   str(edition_name), "metadata", str(index) + ".json"), "w") as f:
+                                   str(edition_name), "metadata", str(index).zfill(zfill_count) + ".json"), "w") as f:
                 json.dump(item, f, indent=4)
 
 
@@ -337,9 +346,9 @@ def main():
     print("Starting task...")
     rt = generate_images(edition_name, num_avatars)
     if METACONFIG["output"] == "csv":
-        generate_metadata_csv(rt, edition_name)
+        generate_metadata_csv(rt, edition_name, num_avatars)
     elif METACONFIG["output"] == "json":
-        generate_metadata_json(rt, edition_name)
+        generate_metadata_json(rt, edition_name, num_avatars)
 
     print("Saving metadata...")
 
