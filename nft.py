@@ -6,10 +6,11 @@ import json
 from typing import Type
 # from config.config_Invisible import CONFIG, METADATA, METACONFIG
 # from config.config_alien import CONFIG, METADATA, METACONFIG
-from config.config_zombie import CONFIG, METADATA, METACONFIG
+# from config.config_zombie import CONFIG, METADATA, METACONFIG
 # from config.config_space import CONFIG, METADATA, METACONFIG
 # from config.config_normal import CONFIG, METADATA, METACONFIG
 # from config.config_Angel import CONFIG, METADATA, METACONFIG
+from config.config_stranger import CONFIG, METADATA, METACONFIG
 # from config.config_Devil import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
@@ -30,6 +31,8 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 # Import configuration file
 
 # Parse the configuration file and make sure it's valid
+image_extention = '.png'
+
 
 def parse_config():
 
@@ -87,7 +90,12 @@ def generate_single_image(filepaths, output_filename=None):
 
     # Save the final image into desired location
     if output_filename is not None:
-        bg.save(output_filename)
+        if image_extention != '.png':
+            rgb_im = bg.convert('RGB')
+            rgb_im.save(output_filename)
+        else:
+            rgb_im = bg.convert('RGB')
+            rgb_im.save(output_filename)
     else:
         # If output filename is not specified, use timestamp to name the image and save it in output/single_images
         if not os.path.exists(os.path.join("output", "single_images")):
@@ -191,7 +199,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
     for n in progressbar(range(count)):
 
         # Set image name
-        image_name = str(n).zfill(zfill_count) + ".png"
+        image_name = str(n).zfill(zfill_count) + image_extention
 
         # Get a random set of valid traits based on rarity weights
         trait_sets, trait_paths = generate_trait_set_from_config()
@@ -203,7 +211,7 @@ def generate_images(edition: str, count: int) -> DataFrame:
         for idx, trait in enumerate(trait_sets):
             if trait is not None:
                 rarity_table[CONFIG[idx]["name"]].append(
-                    trait[: -1 * len(".png")])
+                    trait[: -1 * len(image_extention)])
             else:
                 rarity_table[CONFIG[idx]["name"]].append("none")
 
@@ -220,17 +228,18 @@ def generate_images(edition: str, count: int) -> DataFrame:
 
     # op_path = os.path.join('output', 'edition ' + str(edition))
     for i in img_tb_removed:
-        os.remove(os.path.join(op_path, str(i).zfill(zfill_count) + ".png"))
+        os.remove(os.path.join(op_path, str(
+            i).zfill(zfill_count) + image_extention))
 
     print(sorted(os.listdir(op_path)))
     # Rename images such that it is sequentialluy numbered
     for idx, img in enumerate(sorted(os.listdir(op_path))):
         print(img)
-        # os.rename(
-        #     os.path.join(op_path, img),
-        #     os.path.join(op_path, str(
-        #         idx + METACONFIG["start_seq"]).zfill(zfill_count) + ".png"),
-        # )
+        os.rename(
+            os.path.join(op_path, img),
+            os.path.join(op_path, str(
+                idx + METACONFIG["start_seq"]).zfill(zfill_count) + image_extention),
+        )
 
     # Modify rarity table to reflect removals
     rarity_table = rarity_table.reset_index()
