@@ -5,8 +5,9 @@ import json
 
 def metadataMatchToImage(edition_name: str, rendered_size: int):
     print('Start delete metadatas')
-    images = glob.glob(os.path.join('output', edition_name, 'images', '*'))
-    zfill_count = len(str(rendered_size - 1))
+    images = glob.glob(os.path.join(
+        '/Users/takaho/Documents/Work/MetaKozo/ProductionNormal', 'images', '*'))
+    zfill_count = 4
 
     # 処理順番を合わせるためにソート
     sortedFileName = []
@@ -14,12 +15,13 @@ def metadataMatchToImage(edition_name: str, rendered_size: int):
         sortedFileName.append(
             int(os.path.splitext(os.path.basename(image))[0]))
 
-    print("Rendering %i files / Removed %i files / Remain Total is %i " %
-          (rendered_size, rendered_size - len(sortedFileName), len(sortedFileName)))
-    metadata_path = os.path.join('output', edition_name, 'metadata')
+    # print("Rendering %i files / Removed %i files / Remain Total is %i " %
+    #       (rendered_size, rendered_size - len(sortedFileName), len(sortedFileName)))
+    metadata_path = os.path.join(
+        '/Users/takaho/Documents/Work/MetaKozo/ProductionNormal', 'metadata')
 
     # 画像名称を正としてjsonファイルを削除
-    for i in range(rendered_size):
+    for i in range(9000):
         if i not in sortedFileName:
             if (os.path.isfile(os.path.join(metadata_path, str(i).zfill(zfill_count) + ".json"))):
                 os.remove(os.path.join(metadata_path, str(
@@ -30,26 +32,31 @@ def renameFile(edition_name: str, rendered_size: int):
     print('Start rename files')
     images = glob.glob(os.path.join('output', edition_name, 'images', '*'))
     metadata_path = os.path.join('output', edition_name, 'metadata')
+    print(os.path.join('output', edition_name, 'images', '*'))
 
     # ソート用0埋めしていたが0埋めなしのidxでリネームしていく
     image_path = os.path.join('output', edition_name, 'images')
     for idx, img in enumerate(sorted(images)):
-        # print(os.path.join(metadata_path, str(
-        #     os.path.splitext(os.path.basename(img))[0]) + ".json"))
-        # print(os.path.join(metadata_path, str(idx) + ".json"))
-        # print('----')
+        tmpIdx = idx + 0
+        print(tmpIdx)
+
+        print(os.path.join(metadata_path, str(
+            os.path.splitext(os.path.basename(img))[0]) + ".json"))
+        print(os.path.join(metadata_path, str(tmpIdx) + ".json"))
+        print('----')
+
         os.rename(
             os.path.join(metadata_path, str(
                 os.path.splitext(os.path.basename(img))[0]) + ".json"),
-            os.path.join(metadata_path, str(idx) + ".json"),
+            os.path.join(metadata_path, str(tmpIdx) + ".json"),
         )
-        # print(img)
-        # print(os.path.join(image_path, str(idx) + ".png"))
+        print(img)
+        print(os.path.join(image_path, str(tmpIdx) + ".png"))
         os.rename(
             img,
-            os.path.join(image_path, str(idx) + ".png"),
+            os.path.join(image_path, str(tmpIdx) + ".png"),
         )
-        # print('----')
+        print('----')
 
 
 def renameMetadata(edition_name: str):
@@ -88,7 +95,7 @@ def main():
     mode = int(input())
 
     # Remove metadata so that it is the same as the image file
-    metadataMatchToImage(edition_name, rendered_size)
+    # metadataMatchToImage(edition_name, rendered_size)
 
     if mode == 1:
         return

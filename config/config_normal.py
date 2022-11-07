@@ -22,13 +22,13 @@
 
 METACONFIG = {
     "output": "json",
-    "start_seq": 0,
+    "start_seq": 6000,
     "assets_path": "assets/metakozo",
 }
 
 METADATA = {
     "name": "METAKOZO#_ID_",
-    "description": "Hey, Let's hang out!",
+    "description": "MetaKozo by MetaKoZoDao(MKD)\n\nThe first commerative collection published by MKD.\n\nHolders will receive the right of access to MKD's future projects and physical events.\nFor more information on MKD and MetaKozo, please visit https://www.metakozo-dao.xyz/",
     "external_url": "https://metakozo-dao.xyz/",
     # "background_color": "FFFFFF",
     #    "youtube_url": ""
@@ -37,14 +37,14 @@ METADATA = {
 CONFIG = [
     {
         "id": 10,
-        "name": "background",
+        "name": "Background",
         "directory": "10-background",
         "required": True,
         "rarity_weights": None,
     },
     {
         "id": 15,
-        "name": "background_item",
+        "name": "Background Item",
         "directory": "15-background_item",
         "required": False,
         "rarity_weights": [
@@ -64,7 +64,7 @@ CONFIG = [
     },
     {
         "id": 20,
-        "name": "body",
+        "name": "Body",
         "directory": "20-body",
         "required": True,
         "rarity_weights": [
@@ -75,14 +75,14 @@ CONFIG = [
     },
     {
         "id": 30,
-        "name": "clothes",
+        "name": "Clothes",
         "directory": "30-clothes",
         "required": True,
         "rarity_weights": None,
     },
     {
         "id": 40,
-        "name": "head",
+        "name": "Head",
         "directory": "40-head",
         "required": True,
         "rarity_weights": None,
@@ -94,14 +94,14 @@ CONFIG = [
     },
     {
         "id": 50,
-        "name": "eyes",
+        "name": "Eyes",
         "directory": "50-eyes",
         "required": True,
         "rarity_weights": None,
     },
     {
         "id": 60,
-        "name": "mouth",
+        "name": "Mouth",
         "directory": "60-mouth",
         "required": True,
         "rarity_weights": [
@@ -123,7 +123,7 @@ CONFIG = [
     },
     {
         "id": 70,
-        "name": "nose",
+        "name": "Nose",
         "directory": "70-nose",
         "required": True,
         "rarity_weights": None,
@@ -135,14 +135,14 @@ CONFIG = [
     },
     {
         "id": 80,
-        "name": "hair",
+        "name": "Hair",
         "directory": "80-hair",
         "required": True,
         "rarity_weights": None,
     },
     {
         "id": 90,
-        "name": "face_accessory",
+        "name": "Face Accessory",
         "directory": "90-face_accessory",
         "required": False,
         "rarity_weights": [
@@ -170,11 +170,11 @@ CONFIG = [
             100,
             4000,  # none
         ],
-        "remove": ['eyes'],
+        "remove": ['Eyes'],
     },
     {
         "id": 100,
-        "name": "ear",
+        "name": "Ear",
         "directory": "100-ear",
         "required": True,
         "rarity_weights": None,
@@ -186,7 +186,7 @@ CONFIG = [
     },
     {
         "id": 110,
-        "name": "head_accessory",
+        "name": "Head Accessory",
         "directory": "110-head_accessory",
         "required": False,
         "rarity_weights": [
@@ -219,7 +219,7 @@ CONFIG = [
     },
     {
         "id": 120,
-        "name": "hand_item",
+        "name": "Hand Item",
         "directory": "120-hand_item",
         "required": False,
         "rarity_weights": [
@@ -262,8 +262,8 @@ CONFIG = [
     },
     {
         "id": 130,
-        "name": "attached1",
-        "directory": "130-attached1",
+        "name": "Favorite Things",
+        "directory": "130-favorite_things",
         "required": False,
         "rarity_weights": [
             1,
@@ -285,8 +285,8 @@ CONFIG = [
     },
     {
         "id": 133,
-        "name": "attached2",
-        "directory": "133-attached2",
+        "name": "Doji",
+        "directory": "133-doji",
         "required": False,
         "rarity_weights": [
             1,
@@ -301,8 +301,8 @@ CONFIG = [
     },
     {
         "id": 134,
-        "name": "attached3",
-        "directory": "135-attached3",
+        "name": "Buddy",
+        "directory": "135-buddy",
         "required": False,
         "rarity_weights": [
             1,
@@ -332,7 +332,7 @@ CONFIG = [
     },
     {
         "id": 140,
-        "name": "personality",
+        "name": "Personality",
         "directory": "140-personality",
         "required": True,
         "rarity_weights": None,

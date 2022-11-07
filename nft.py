@@ -5,12 +5,14 @@
 import json
 from typing import Type
 # from config.config_Invisible import CONFIG, METADATA, METACONFIG
+# from config.config_animal import CONFIG, METADATA, METACONFIG
 # from config.config_alien import CONFIG, METADATA, METACONFIG
 # from config.config_zombie import CONFIG, METADATA, METACONFIG
 # from config.config_space import CONFIG, METADATA, METACONFIG
-# from config.config_normal import CONFIG, METADATA, METACONFIG
+from config.config_normal import CONFIG, METADATA, METACONFIG
+# from config.config_ntp import CONFIG, METADATA, METACONFIG
 # from config.config_Angel import CONFIG, METADATA, METACONFIG
-from config.config_stranger import CONFIG, METADATA, METACONFIG
+# from config.config_stranger import CONFIG, METADATA, METACONFIG
 # from config.config_Devil import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
@@ -164,12 +166,12 @@ def generate_trait_set_from_config():
                 trait_path = os.path.join(layer["directory"], traits[idx])
                 trait_paths.append(trait_path)
         try:
-            if idx != 0 and layer["remove"] and traits[idx] != 'none.png':
+            if idx != 0 and layer["remove"] and traits[idx] != 'None.png':
                 for l in layer["remove"]:
                     trait_set = [i if not (trait_set[5] in i)
-                                 else 'none' for i in trait_set]
+                                 else 'None' for i in trait_set]
                     trait_paths = [i if not (trait_paths[5] in i)
-                                   else 'none' for i in trait_paths]
+                                   else 'None' for i in trait_paths]
         except KeyError:
             pass
         except TypeError:
@@ -199,7 +201,9 @@ def generate_images(edition: str, count: int) -> DataFrame:
     for n in progressbar(range(count)):
 
         # Set image name
-        image_name = str(n).zfill(zfill_count) + image_extention
+        # image_name = str(n).zfill(zfill_count) + image_extention
+        image_name = str(n + METACONFIG["start_seq"]
+                         ).zfill(zfill_count) + image_extention
 
         # Get a random set of valid traits based on rarity weights
         trait_sets, trait_paths = generate_trait_set_from_config()
@@ -211,9 +215,9 @@ def generate_images(edition: str, count: int) -> DataFrame:
         for idx, trait in enumerate(trait_sets):
             if trait is not None:
                 rarity_table[CONFIG[idx]["name"]].append(
-                    trait[: -1 * len(image_extention)])
+                    trait[: -1 * len(image_extention)].replace('_', ' '))
             else:
-                rarity_table[CONFIG[idx]["name"]].append("none")
+                rarity_table[CONFIG[idx]["name"]].append("None")
 
     # Create the final rarity table by removing duplicate creat
     rarity_table = pd.DataFrame(rarity_table).drop_duplicates()
@@ -233,13 +237,13 @@ def generate_images(edition: str, count: int) -> DataFrame:
 
     print(sorted(os.listdir(op_path)))
     # Rename images such that it is sequentialluy numbered
-    for idx, img in enumerate(sorted(os.listdir(op_path))):
-        print(img)
-        os.rename(
-            os.path.join(op_path, img),
-            os.path.join(op_path, str(
-                idx + METACONFIG["start_seq"]).zfill(zfill_count) + image_extention),
-        )
+    # for idx, img in enumerate(sorted(os.listdir(op_path))):
+    #     print(img)
+    #     os.rename(
+    #         os.path.join(op_path, img),
+    #         os.path.join(op_path, str(
+    #             idx + METACONFIG["start_seq"]).zfill(zfill_count) + image_extention),
+    #     )
 
     # Modify rarity table to reflect removals
     rarity_table = rarity_table.reset_index()
@@ -305,7 +309,7 @@ def generate_metadata_json(rarity_table: DataFrame, edition_name: str, count: in
         for (rarity, value) in zip(rarity_column, row):
             ralityvalue.append({
                 "trait_type": rarity,
-                "value": 'none' if value == '' else value
+                "value": 'None' if value == '' else value
             })
         listvalue.append(ralityvalue)
         meta_list.append(listvalue)
@@ -329,7 +333,8 @@ def generate_metadata_json(rarity_table: DataFrame, edition_name: str, count: in
             os.makedirs(metadataDirName)
         for index, item in enumerate(json.loads(jsonArray)):
             with open(os.path.join(os.getcwd(), "output", "edition_" +
-                                   str(edition_name), "metadata", str(index).zfill(zfill_count) + ".json"), "w") as f:
+                                   str(edition_name), "metadata", str(index + METACONFIG["start_seq"]
+                                                                      ) + ".json"), "w") as f:
                 json.dump(item, f, indent=4)
 
 

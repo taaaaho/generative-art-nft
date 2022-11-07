@@ -1,7 +1,7 @@
 METACONFIG = {
     "output": "json",
     "start_seq": 0,
-    "assets_path": "assets/9-Invisible",
+    "assets_path": "assets/10.NTP",
 }
 
 METADATA = {
@@ -38,6 +38,11 @@ CONFIG = [
         "directory": "40-head",
         "required": True,
         "rarity_weights": None,
+        "link": {
+            "TypeA.png": "TypeA.png",
+            "TypeB.png": "TypeB.png",
+            "TypeC.png": "TypeC.png",
+        },
     },
     {
         "id": 50,
@@ -59,6 +64,11 @@ CONFIG = [
         "directory": "70-nose",
         "required": True,
         "rarity_weights": None,
+        "link": {
+            "TypeA.png": "TypeA.png",
+            "TypeB.png": "TypeB.png",
+            "TypeC.png": "TypeC.png",
+        },
     },
     {
         "id": 80,
@@ -67,37 +77,31 @@ CONFIG = [
         "required": True,
         "rarity_weights": None,
     },
-    {
-        "id": 90,
-        "name": "face_accessory",
-        "directory": "90-face_accessory",
-        "required": True,
-        "rarity_weights": [
-            1,
-            1,
-            5,
-        ],
-    },
+    # {
+    #     "id": 90,
+    #     "name": "face_accessory",
+    #     "directory": "90-face_accessory",
+    #     "required": False,
+    #     "rarity_weights": None,
+    #     "remove": ['eyes'],
+    # },
     {
         "id": 100,
         "name": "ear",
         "directory": "100-ear",
         "required": True,
         "rarity_weights": None,
+        "link": {
+            "TypeA.png": "TypeA.png",
+            "TypeB.png": "TypeB.png",
+            "TypeC.png": "TypeC.png",
+        },
     },
     {
         "id": 110,
         "name": "head_accessory",
         "directory": "110-head_accessory",
         "required": True,
-        "rarity_weights": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            6,
-        ],
+        "rarity_weights": None
     },
 ]

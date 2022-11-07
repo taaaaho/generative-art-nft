@@ -1,7 +1,7 @@
 METACONFIG = {
     "output": "json",
     "start_seq": 0,
-    "assets_path": "assets/9-Invisible",
+    "assets_path": "assets/8.Animal",
 }
 
 METADATA = {
@@ -15,6 +15,13 @@ CONFIG = [
         "id": 10,
         "name": "background",
         "directory": "10-background",
+        "required": True,
+        "rarity_weights": None,
+    },
+    {
+        "id": 18,
+        "name": "back_accessory",
+        "directory": "18-back_accessory",
         "required": True,
         "rarity_weights": None,
     },
@@ -68,36 +75,17 @@ CONFIG = [
         "rarity_weights": None,
     },
     {
-        "id": 90,
-        "name": "face_accessory",
-        "directory": "90-face_accessory",
-        "required": True,
-        "rarity_weights": [
-            1,
-            1,
-            5,
-        ],
-    },
-    {
-        "id": 100,
-        "name": "ear",
-        "directory": "100-ear",
-        "required": True,
-        "rarity_weights": None,
-    },
-    {
         "id": 110,
         "name": "head_accessory",
         "directory": "110-head_accessory",
         "required": True,
-        "rarity_weights": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            6,
-        ],
+        "rarity_weights": None,
+    },
+    {
+        "id": 120,
+        "name": "hand_item",
+        "directory": "120-hand_item",
+        "required": True,
+        "rarity_weights": None,
     },
 ]
