@@ -169,9 +169,9 @@ def generate_trait_set_from_config():
             if idx != 0 and layer["remove"] and traits[idx] != 'None.png':
                 for l in layer["remove"]:
                     trait_set = [i if not (trait_set[5] in i)
-                                 else 'None' for i in trait_set]
+                                 else 'Normal' for i in trait_set]
                     trait_paths = [i if not (trait_paths[5] in i)
-                                   else 'None' for i in trait_paths]
+                                   else 'Normal' for i in trait_paths]
         except KeyError:
             pass
         except TypeError:
