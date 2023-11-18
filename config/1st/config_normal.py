@@ -22,7 +22,7 @@
 
 METACONFIG = {
     "output": "json",
-    "start_seq": 6000,
+    "start_seq": 0,
     "assets_path": "assets/metakozo",
 }
 
@@ -30,8 +30,6 @@ METADATA = {
     "name": "METAKOZO#_ID_",
     "description": "MetaKozo by MetaKoZoDao(MKD)\n\nThe first commerative collection published by MKD.\n\nHolders will receive the right of access to MKD's future projects and physical events.\nFor more information on MKD and MetaKozo, please visit https://www.metakozo-dao.xyz/",
     "external_url": "https://metakozo-dao.xyz/",
-    # "background_color": "FFFFFF",
-    #    "youtube_url": ""
 }
 
 CONFIG = [
@@ -55,11 +53,11 @@ CONFIG = [
             1,
             1,
             1,
-            1,
-            1,
-            1,
-            1,
             50,
+            1,
+            1,
+            1,
+            1,
         ],
     },
     {
@@ -67,11 +65,7 @@ CONFIG = [
         "name": "Body",
         "directory": "20-body",
         "required": True,
-        "rarity_weights": [
-            1,
-            4,
-            4,
-        ]
+        "rarity_weights": None
     },
     {
         "id": 30,
@@ -107,7 +101,7 @@ CONFIG = [
         "rarity_weights": [
             10,
             10,
-            1,
+            10,
             10,
             10,
             10,
@@ -154,21 +148,21 @@ CONFIG = [
             100,
             100,
             100,
-            100,
-            10,
-            100,
-            100,
-            100,
-            100,
-            100,
-            100,
-            100,
-            100,
-            100,
-            10,
-            100,
-            100,
             4000,  # none
+            10,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            100,
+            10,
+            100,
+            100,
+            100,
         ],
         "remove": ['Eyes'],
     },
@@ -209,12 +203,12 @@ CONFIG = [
             1,
             1,
             1,
+            20,
             1,
             1,
             1,
             1,
-            1,
-            40,  # none
+            1,  # none
         ],
     },
     {
@@ -247,17 +241,17 @@ CONFIG = [
             5,
             100,
             100,
-            1,
+            4000,
             100,
             100,
             100,
             100,
-            1,
+            10,
             100,
             100,
             100,
             100,
-            4000,  # none.png
+            100,  # none.png
         ],
     },
     {
@@ -273,6 +267,7 @@ CONFIG = [
             1,
             1,
             1,
+            20,
             1,
             1,
             1,
@@ -280,7 +275,6 @@ CONFIG = [
             1,
             1,
             1,
-            28,
         ],
     },
     {
@@ -292,11 +286,11 @@ CONFIG = [
             1,
             1,
             1,
+            10,
             1,
             1,
             1,
             1,
-            18,
         ],
     },
     {
@@ -318,6 +312,7 @@ CONFIG = [
             1,
             1,
             1,
+            30,
             1,
             1,
             1,
@@ -327,7 +322,6 @@ CONFIG = [
             1,
             1,
             1,
-            38,
         ],
     },
     {

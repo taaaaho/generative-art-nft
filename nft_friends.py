@@ -4,18 +4,7 @@
 # Import required libraries
 import json
 from typing import Type
-# from config.config_Invisible import CONFIG, METADATA, METACONFIG
-# from config.config_animal import CONFIG, METADATA, METACONFIG
-# from config.config_alien import CONFIG, METADATA, METACONFIG
-# from config.config_zombie import CONFIG, METADATA, METACONFIG
-# from config.config_space import CONFIG, METADATA, METACONFIG
-# from config.config_normal import CONFIG, METADATA, METACONFIG
-# from config.config_Friends import CONFIG, METADATA, METACONFIG
-# from config.config_ntp import CONFIG, METADATA, METACONFIG
-# from config.config_Angel import CONFIG, METADATA, METACONFIG
-# from config.config_stranger import CONFIG, METADATA, METACONFIG
-# from config.config_Devil import CONFIG, METADATA, METACONFIG
-from config.config_zombie import CONFIG, METADATA, METACONFIG
+from config.config_Friends import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
 import numpy as np
@@ -233,9 +222,9 @@ def generate_images(edition: str, count: int) -> DataFrame:
     print("Removing %i images..." % (len(img_tb_removed)))
 
     # op_path = os.path.join('output', 'edition ' + str(edition))
-    # for i in img_tb_removed:
-    #     os.remove(os.path.join(op_path, str(
-    #         i).zfill(zfill_count) + image_extention))
+    for i in img_tb_removed:
+        os.remove(os.path.join(op_path, str(
+            i).zfill(zfill_count) + image_extention))
 
     print(sorted(os.listdir(op_path)))
     # Rename images such that it is sequentialluy numbered

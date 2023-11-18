@@ -86,7 +86,7 @@ def renameMetadata(edition_name: str):
 def main():
     print('Start reseq')
     print("What would you like to call this edition?: ")
-    edition_name = 'edition_' + input()
+    edition_name = input()
 
     print("Collection size?: ")
     rendered_size = int(input())

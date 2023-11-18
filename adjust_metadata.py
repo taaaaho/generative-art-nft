@@ -25,9 +25,24 @@ personality = ['Adamant', 'Bashful', 'Docile', 'Gentle', 'Hardy',
                'Impish', 'Lonely', 'Mild', 'Modest', 'Relaxed', 'Serious', 'Geek']
 
 
+def zfillName():
+    zfill_count = 4
+    path = '/Users/takaho/Documents/Work/MetaKozo/Friends_check/Friend/Friends_Image'
+    metadatas = glob.glob(os.path.join(
+        path, '*'))
+    for metadata in metadatas:
+        zfillFileName = str(os.path.splitext(os.path.basename(metadata))[0]).zfill(zfill_count) + os.path.splitext(os.path.basename(metadata))[1]
+        # print(str(os.path.splitext(os.path.basename(metadata))[0]).zfill(zfill_count) + os.path.splitext(os.path.basename(metadata))[1])
+        print(path + '/' + zfillFileName)
+        os.rename(
+            metadata,
+            path + '/' + zfillFileName,
+        )
+
+# ファイル名称に合わせてNameとImageのパスを修正
 def renameSpecificMetadata():
     print('Start rename metadatas')
-    path = '/Users/takaho/Downloads/ruki_11182/metadata'
+    path = '/Users/takaho/Documents/Work/MetaKozo/Friends/friends/friend_fix_1226'
     metadatas = glob.glob(os.path.join(
         path, '*'))
 
@@ -42,7 +57,7 @@ def renameSpecificMetadata():
             # df['image'] = '/'.join(image)
 
             # 1113 add data
-            df['image'] = 'https://storage.googleapis.com/metakozo/images/' + str(os.path.splitext(os.path.basename(metadata))[0]) + '.png'
+            df['image'] = 'ar://z20xKR1-xWUI-t9EkQP33AjpmvVXQh6E0gwbapjdwb8/' + str(os.path.splitext(os.path.basename(metadata))[0]) + '.png'
             # 1113 add data
             
             # Name rename
@@ -56,9 +71,10 @@ def renameSpecificMetadata():
             wf.close()
         f.close()
 
+# ファイル名称に合わせてNameとImageのパスを修正
 def renameMetadata():
     print('Start rename metadatas')
-    path = '/Users/takaho/src/github.com/taaaaho/nft-viewer/public/1124/metadata'
+    path = '/Users/takaho/Documents/Work/MetaKozo/Friends/friends/friend_fix_1226'
     metadatas = glob.glob(os.path.join(
         path, '*'))
 
@@ -73,7 +89,7 @@ def renameMetadata():
             # df['image'] = '/'.join(image)
 
             # 1113 add data
-            df['image'] = 'https://storage.googleapis.com/metakozo/images/' + str(os.path.splitext(os.path.basename(metadata))[0]) + '.png'
+            df['image'] = 'ar://z20xKR1-xWUI-t9EkQP33AjpmvVXQh6E0gwbapjdwb8/' + str(os.path.splitext(os.path.basename(metadata))[0]) + '.png'
             # 1113 add data
             
             # Name rename
@@ -253,6 +269,58 @@ def createMBAMetadata():
     #     f.close()
     # print(count)
 
+def createSantaSBTMetaData():
+    images = ['ar://yWR88v-haMqoo1DNiNzJEpOX13TEeS2y1p-zrpmWnGU','ar://lKLB2IuFKt7EtHAJxSMR31UZUftRQp1ZF-q78BMsSrA', 'ar://hTOjghvbysM2RK59KudNQR5R2p08Et-ED4miz-5Vxvk']
+    path = '/Users/takaho/Documents/Work/MetaKozo/SantaSBT/base.json'
+    export_path = '/Users/takaho/Documents/Work/MetaKozo/SantaSBT/metadata'
+    metadatas = glob.glob(path)
+    with open(metadatas[0]) as f:
+        df = json.load(f)
+        temp_name = df['name']
+        for i in range(400):
+            df['name'] = temp_name + '#' + str(i)
+            df['image'] = random.choice(images)
+            with open(os.path.join(export_path,str(i) + '.json'), 'w') as wf:
+                json.dump(df, wf, indent=4)
+            wf.close()     
+    f.close()
+
+def fixFriendsMetadata():
+    # 317 - 510のmetadataをファイル名とname等を1ずつ上げる
+    path = '/Users/takaho/Documents/Work/MetaKozo/Friends/friends/metadata'
+    metadatas = glob.glob(os.path.join(
+        path, '*'))
+    metadatas.sort(reverse=True)
+    for index, metadata in enumerate(metadatas):
+        with open(metadata) as f:
+            df = json.load(f)
+            temp_name = df['name']
+            temp_name = temp_name.split('#')
+            
+            if int(temp_name[1]) >= 310 and int(temp_name[1]) <= 396:
+                print('-----')
+                print(df['name'])
+                print(temp_name[0] + '#' + str(int(temp_name[1]) + 1))
+                print(os.path.join(path, str(int(metadata.split('/')[9].split('.')[0]) + 1) + '.json'))
+                df['name'] = temp_name[0] + '#' + str(int(temp_name[1]) + 1)
+                with open(os.path.join(path, str(int(metadata.split('/')[9].split('.')[0]) + 1) + '.json'), 'w') as wf:
+                    json.dump(df, wf, indent=4)
+                wf.close()
+                continue
+
+            if int(temp_name[1]) >= 403 and int(temp_name[1]) <= 510:
+                print('-----')
+                print(df['name'])
+                print(temp_name[0] + '#' + str(int(temp_name[1]) + 1))
+                print(os.path.join(path, str(int(metadata.split('/')[9].split('.')[0]) + 1) + '.json'))
+                df['name'] = temp_name[0] + '#' + str(int(temp_name[1]) + 1)
+                with open(os.path.join(path, str(int(metadata.split('/')[9].split('.')[0]) + 1) + '.json'), 'w') as wf:
+                    json.dump(df, wf, indent=4)
+                wf.close()  
+                continue
+            # print(df)
+
+        f.close()
 def main():
     # Overwrite metadata files
     # adjustMetadata()
@@ -261,7 +329,12 @@ def main():
     # removeMeta()
     # renameEyesNormaltoLucky()
     # renameEyesNoneToNormal()
-    createMBAMetadata()
-
+    # createMBAMetadata()
+    #### Friends
+    # zfillName()
+    # createSantaSBTMetaData()
+    #### Friends Fix
+    # fixFriendsMetadata()
+    renameMetadata()
 
 main()

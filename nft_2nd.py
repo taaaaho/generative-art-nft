@@ -4,18 +4,8 @@
 # Import required libraries
 import json
 from typing import Type
-# from config.config_Invisible import CONFIG, METADATA, METACONFIG
-# from config.config_animal import CONFIG, METADATA, METACONFIG
-# from config.config_alien import CONFIG, METADATA, METACONFIG
 # from config.config_zombie import CONFIG, METADATA, METACONFIG
-# from config.config_space import CONFIG, METADATA, METACONFIG
-# from config.config_normal import CONFIG, METADATA, METACONFIG
-# from config.config_Friends import CONFIG, METADATA, METACONFIG
-# from config.config_ntp import CONFIG, METADATA, METACONFIG
-# from config.config_Angel import CONFIG, METADATA, METACONFIG
-# from config.config_stranger import CONFIG, METADATA, METACONFIG
-# from config.config_Devil import CONFIG, METADATA, METACONFIG
-from config.config_zombie import CONFIG, METADATA, METACONFIG
+from config.config_hero import CONFIG, METADATA, METACONFIG
 from PIL import Image
 import pandas as pd
 import numpy as np
@@ -67,6 +57,8 @@ def parse_config():
             raise ValueError("Rarity weights is invalid")
 
         rarities = get_weighted_rarities(rarities)
+        print('rarities')
+        print(rarities)
 
         # Re-assign final values to main CONFIG
         layer["rarity_weights"] = rarities
@@ -167,17 +159,17 @@ def generate_trait_set_from_config():
             if traits[idx] is not None:
                 trait_path = os.path.join(layer["directory"], traits[idx])
                 trait_paths.append(trait_path)
-        try:
-            if idx != 0 and layer["remove"] and traits[idx] != 'None.png':
-                for l in layer["remove"]:
-                    trait_set = [i if not (trait_set[5] in i)
-                                 else 'Normal' for i in trait_set]
-                    trait_paths = [i if not (trait_paths[5] in i)
-                                   else 'Normal' for i in trait_paths]
-        except KeyError:
-            pass
-        except TypeError:
-            pass
+        # try:
+        #     if idx != 0 and layer["remove"] and traits[idx] != 'None.png':
+        #         for l in layer["remove"]:
+        #             trait_set = [i if not (trait_set[5] in i)
+        #                          else 'Normal' for i in trait_set]
+        #             trait_paths = [i if not (trait_paths[5] in i)
+        #                            else 'Normal' for i in trait_paths]
+        # except KeyError:
+        #     pass
+        # except TypeError:
+        #     pass
 
     return trait_set, trait_paths
 
@@ -217,7 +209,9 @@ def generate_images(edition: str, count: int) -> DataFrame:
         for idx, trait in enumerate(trait_sets):
             if trait is not None:
                 rarity_table[CONFIG[idx]["name"]].append(
-                    trait[: -1 * len(image_extention)].replace('_', ' '))
+                    trait[: -1 * len(image_extention)]
+                    # .replace('_', ' ')
+                    )
             else:
                 rarity_table[CONFIG[idx]["name"]].append("None")
 
