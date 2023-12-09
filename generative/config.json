@@ -1,0 +1,83 @@
+{
+  "assset_dir": "../assets/bybit/",
+  "output_dir": "output/",
+  "json_dir": "json/",
+  "thumbnail_dir": "thumbnail/",
+  "csv_file_name": "metadata.csv",
+  "max_image_generate": 22750,
+  "thumbnail": {
+    "width": 600,
+    "height": 600
+  },
+  "traits": [
+    {
+      "order": 10,
+      "name": "Background",
+      "blend": "over"
+  },
+  {
+      "order": 15,
+      "name": "Background_Item"
+  },
+  {
+      "order": 20,
+      "name": "Body"
+  },
+  {
+      "order": 30,
+      "name": "Clothes"
+  },
+  {
+      "order": 40,
+      "name": "Head"
+  },
+  {
+      "order": 50,
+      "name": "Eyes"
+  },
+  {
+      "order": 60,
+      "name": "Mouth"
+  },
+  {
+      "order": 70,
+      "name": "Nose"
+  },
+  {
+      "order": 80,
+      "name": "Hair"
+  },
+  {
+      "order": 90,
+      "name": "Face_Accessory"
+  },
+  {
+      "order": 100,
+      "name": "Ear"
+  },
+  {
+      "order": 110,
+      "name": "Head_Accessory"
+  },
+  {
+      "order": 120,
+      "name": "Hand_Item"
+  },
+  {
+      "order": 130,
+      "name": "Favorite_Things"
+  },
+  {
+      "order": 133,
+      "name": "Doji"
+  },
+  {
+      "order": 134,
+      "name": "Buddy"
+  },
+  {
+      "order": 140,
+      "name": "Personality"
+  }
+  ]
+}

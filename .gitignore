@@ -1,3 +1,5 @@
 __pycache__/
 output/**
 assets/**
+generative/node_modules
+generative/output
